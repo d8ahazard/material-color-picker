@@ -50,10 +50,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     AlertDialog alertDialog;
     MixpanelAPI mixpanel;
     JSONObject props;
+    static final int COLOR_SELECTION_COMPLETE = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        String colorname = intent.getStringExtra("Prefname");
 
         mixpanel = MixpanelAPI.getInstance(this, MIXPANEL_TOKEN);
         props = new JSONObject();
@@ -233,6 +237,9 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         mixpanel.track("Color Selected", props);
 
         Toast.makeText(this, "Color " + buttonSelector.getText() + " has been saved.", Toast.LENGTH_SHORT).show();
+        Intent returnIntent = new Intent();
+        returnIntent.putExtra("result",Color.rgb(red, green, blue));
+        setResult(COLOR_SELECTION_COMPLETE,returnIntent);
         finish();
 
     }
