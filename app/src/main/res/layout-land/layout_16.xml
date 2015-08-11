@@ -108,18 +108,6 @@
 
         </RelativeLayout>
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/about"
-            android:textSize="16sp"
-            android:fontFamily="sans-serif-condensed"
-            android:text="@string/about"
-            android:textAllCaps="true"
-            android:onClick="showDetails"
-            android:background="@drawable/about_16"
-            style="?android:borderlessButtonStyle"/>
-
     </LinearLayout>
 
 </LinearLayout>
