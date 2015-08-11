@@ -51,6 +51,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     MixpanelAPI mixpanel;
     JSONObject props;
     static final int COLOR_SELECTION_COMPLETE = 1;
+    static final int COLOR_SELECTION_CANCELLED = 2;
     public static String colorname = null;
     public static Integer current = null;
 
@@ -253,6 +254,12 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent returnIntent = new Intent();
+        setResult(COLOR_SELECTION_CANCELLED,returnIntent);
+        finish();
+    }
 
     @Override
     protected void onDestroy() {
@@ -260,14 +267,6 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         //Manually flushing selected colors to mixpanel server
         mixpanel.flush();
-
-        //Storing values of red, green & blue in SharedPreferences
-        SharedPreferences settings = getSharedPreferences("COLOR_SETTINGS", 0);
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("RED_COLOR", redSeekBar.getProgress());
-        editor.putInt("GREEN_COLOR", greenSeekBar.getProgress());
-        editor.putInt("BLUE_COLOR", blueSeekBar.getProgress());
-        editor.apply();
 
         //Properly dismissing dialog to prevent errors while changing orientation
         try {
