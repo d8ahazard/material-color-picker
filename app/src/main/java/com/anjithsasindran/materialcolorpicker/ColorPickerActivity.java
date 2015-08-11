@@ -51,14 +51,16 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     MixpanelAPI mixpanel;
     JSONObject props;
     static final int COLOR_SELECTION_COMPLETE = 1;
+    public static String colorname = null;
+    public static Integer current = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
-        String colorname = intent.getStringExtra("Prefname");
-
+        colorname = intent.getStringExtra("Prefname");
+        current = intent.getIntExtra("Current", 0);
         mixpanel = MixpanelAPI.getInstance(this, MIXPANEL_TOKEN);
         props = new JSONObject();
 
@@ -70,10 +72,9 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
 
-        SharedPreferences settings = getSharedPreferences("COLOR_SETTINGS", 0);
-        red = settings.getInt("RED_COLOR", 0);
-        green = settings.getInt("GREEN_COLOR", 0);
-        blue = settings.getInt("BLUE_COLOR", 0);
+        red = Color.red(current);
+        green = Color.green(current);
+        blue = Color.blue(current);
 
         clipBoard = (ClipboardManager)getSystemService(Context.CLIPBOARD_SERVICE);
         colorView = findViewById(R.id.colorView);
@@ -101,7 +102,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         //Setting View, Status bar & button color & hex codes
 
-        colorView.setBackgroundColor(Color.rgb(red, green, blue));
+        colorView.setBackgroundColor(current);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
@@ -245,6 +246,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         Toast.makeText(this, "Color " + buttonSelector.getText() + " has been saved.", Toast.LENGTH_SHORT).show();
         Intent returnIntent = new Intent();
+        returnIntent.putExtra("Name",colorname);
         returnIntent.putExtra("Color",getIntFromColor(red, green, blue));
         setResult(COLOR_SELECTION_COMPLETE,returnIntent);
         finish();
