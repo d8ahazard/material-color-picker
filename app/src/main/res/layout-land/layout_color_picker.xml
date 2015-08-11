@@ -102,7 +102,9 @@
                 android:layout_alignParentBottom="true"
                 android:textAllCaps="false"
                 android:background="@drawable/color_button"
-                android:onClick="colorSelect" />
+                android:onClick="colorSelect"
+                android:text="Save Color"
+                android:textColor="#ff000000" />
 
         </RelativeLayout>
 

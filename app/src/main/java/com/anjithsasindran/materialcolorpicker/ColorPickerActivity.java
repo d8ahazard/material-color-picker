@@ -111,7 +111,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         }
 
         //Set's color hex on Button
-        buttonSelector.setText(String.format("#%02x%02x%02x", red, green, blue));
+
 
     }
 
@@ -207,7 +207,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         }
 
         //Setting the button hex color
-        buttonSelector.setText(String.format("#%02x%02x%02x", red, green, blue));
+
 
     }
 
@@ -221,6 +221,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
     }
 
+    public int getIntFromColor(int Red, int Green, int Blue){
+        Red = (Red << 16) & 0x00FF0000; //Shift red 16-bits and mask out other stuff
+        Green = (Green << 8) & 0x0000FF00; //Shift Green 8-bits and mask out other stuff
+        Blue = Blue & 0x000000FF; //Mask out anything not blue.
+
+        return 0xFF000000 | Red | Green | Blue; //0xFF000000 for 100% Alpha. Bitwise OR everything together.
+    }
+
     public void colorSelect(View view) {
 
         //Copies color to Clipboard
@@ -230,15 +238,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         //Mixpanel event tracker
         try {
             props.put("Color", buttonSelector.getText());
-        }
-        catch(JSONException e) {
+        } catch (JSONException e) {
             e.printStackTrace();
         }
         mixpanel.track("Color Selected", props);
 
         Toast.makeText(this, "Color " + buttonSelector.getText() + " has been saved.", Toast.LENGTH_SHORT).show();
         Intent returnIntent = new Intent();
-        returnIntent.putExtra("result",Color.rgb(red, green, blue));
+        returnIntent.putExtra("Color",getIntFromColor(red, green, blue));
         setResult(COLOR_SELECTION_COMPLETE,returnIntent);
         finish();
 
