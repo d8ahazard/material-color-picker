@@ -12,7 +12,7 @@
         android:text="@string/developedby"
         android:textSize="16sp"
         android:paddingTop="16dp"
-        android:id="@+id/developer" />
+         />
 
     <LinearLayout
         android:layout_width="fill_parent"
