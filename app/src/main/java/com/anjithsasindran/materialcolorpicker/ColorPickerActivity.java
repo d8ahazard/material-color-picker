@@ -173,6 +173,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         }
 
         colorView.setBackgroundColor(Color.rgb(red, green, blue));
+        buttonSelector.setBackgroundColor(Color.rgb(red, green, blue));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
