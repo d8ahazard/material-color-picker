@@ -23,6 +23,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.2.1'
     compile 'com.afollestad:material-dialogs:0.7.8.1'
     compile 'com.wefika:flowlayout:0.3.0'
-    compile "com.mixpanel.android:mixpanel-android:4.5.3"
     compile "com.google.android.gms:play-services:7.5.0"
 }
