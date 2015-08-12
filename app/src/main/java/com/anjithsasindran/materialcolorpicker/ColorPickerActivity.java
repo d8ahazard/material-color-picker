@@ -1,12 +1,12 @@
 package com.anjithsasindran.materialcolorpicker;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
@@ -17,7 +17,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ColorPickerActivity extends PreferenceActivity implements SeekBar.OnSeekBarChangeListener {
+public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
 
 
     static final int COLOR_SELECTION_COMPLETE = 1;
