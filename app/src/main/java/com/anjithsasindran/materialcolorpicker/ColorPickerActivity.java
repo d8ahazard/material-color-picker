@@ -81,6 +81,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         //Setting View, Status bar & button color & hex codes
 
         colorView.setBackgroundColor(current);
+        buttonSelector.setBackgroundColor(current);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
