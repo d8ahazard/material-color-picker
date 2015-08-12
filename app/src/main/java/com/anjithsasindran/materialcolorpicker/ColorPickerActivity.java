@@ -40,7 +40,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         Intent intent = getIntent();
         colorname = intent.getStringExtra("Prefname");
         current = intent.getIntExtra("Current", 0);
-        Log.d(TAG, colorname + current.toString());
+        Log.d(TAG, "Picker Started, received " + colorname + current.toString());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setContentView(R.layout.layout_color_picker);
@@ -53,7 +53,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         red = Color.red(current);
         green = Color.green(current);
         blue = Color.blue(current);
-        Log.d(TAG, String.valueOf(red) + String.valueOf(green) + String.valueOf(blue));
+        Log.d(TAG, "Color converted to " + String.valueOf(red) + String.valueOf(green) + String.valueOf(blue));
 
         colorView = findViewById(R.id.colorView);
         window = getWindow();
@@ -206,6 +206,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         returnIntent.putExtra("Name", colorname);
         returnIntent.putExtra("Color", getIntFromColor(red, green, blue));
         Log.d(TAG,"Final output - " + colorname + " " + red + " " + green + " " + blue);
+        Log.d(TAG,"Final output (int) - " + getIntFromColor(red, green, blue));
 
         setResult(COLOR_SELECTION_COMPLETE, returnIntent);
         finish();
