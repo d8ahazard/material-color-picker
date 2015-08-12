@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Display;
 import android.view.Surface;
 import android.view.View;
@@ -15,7 +16,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarChangeListener {
 
@@ -23,6 +23,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     static final int COLOR_SELECTION_COMPLETE = 1;
     static final int COLOR_SELECTION_CANCELLED = 2;
     public static String colorname = null;
+    public static final String TAG = "Colorpicker: ";
     public static Integer current = null;
     View colorView;
     SeekBar redSeekBar, greenSeekBar, blueSeekBar;
@@ -39,6 +40,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         Intent intent = getIntent();
         colorname = intent.getStringExtra("Prefname");
         current = intent.getIntExtra("Current", 0);
+        Log.d(TAG, colorname + current.toString());
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setContentView(R.layout.layout_color_picker);
@@ -51,6 +53,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         red = Color.red(current);
         green = Color.green(current);
         blue = Color.blue(current);
+        Log.d(TAG, String.valueOf(red) + String.valueOf(green) + String.valueOf(blue));
 
         colorView = findViewById(R.id.colorView);
         window = getWindow();
@@ -85,9 +88,6 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 window.setStatusBarColor(Color.rgb(red, green, blue));
 
         }
-
-        //Set's color hex on Button
-
 
     }
 
@@ -202,10 +202,11 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
     public void colorSelect(View view) {
 
-        Toast.makeText(this, "Color " + buttonSelector.getText() + " has been saved.", Toast.LENGTH_SHORT).show();
         Intent returnIntent = new Intent();
         returnIntent.putExtra("Name", colorname);
         returnIntent.putExtra("Color", getIntFromColor(red, green, blue));
+        Log.d(TAG,"Final output - " + colorname + " " + red + " " + green + " " + blue);
+
         setResult(COLOR_SELECTION_COMPLETE, returnIntent);
         finish();
 
