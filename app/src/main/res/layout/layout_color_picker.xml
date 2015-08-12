@@ -87,18 +87,14 @@
             android:thumbTint="@color/blue"/>
 
         <Button
+            android:id="@+id/buttonSelector"
             android:layout_width="150dp"
             android:layout_height="60dp"
             android:textSize="18sp"
-            android:fontFamily="sans-serif-condensed"
-            android:id="@+id/buttonSelector"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:textAllCaps="false"
-            android:background="@drawable/color_button"
             android:onClick="colorSelect"
-            android:text="Save Color"
-            android:textColor="#ff000000" />
+            />
 
     </RelativeLayout>
 

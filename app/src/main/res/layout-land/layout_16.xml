@@ -95,16 +95,14 @@
                 android:progressDrawable="@drawable/blue_progress" />
 
             <Button
+                android:id="@+id/buttonSelector"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
                 android:textSize="18sp"
-                android:fontFamily="sans-serif-condensed"
-                android:id="@+id/buttonSelector"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                android:textAllCaps="false"
-                android:background="@drawable/color_button_16"
-                android:onClick="colorSelect" />
+                android:onClick="colorSelect"
+                />
 
         </RelativeLayout>
 
