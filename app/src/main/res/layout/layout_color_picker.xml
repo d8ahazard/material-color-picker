@@ -95,6 +95,7 @@
             android:layout_alignParentBottom="true"
             android:onClick="colorSelect"
             android:text="@string/save_color"
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 

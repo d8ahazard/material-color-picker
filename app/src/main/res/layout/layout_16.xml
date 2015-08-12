@@ -97,6 +97,8 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:onClick="colorSelect"
+            android:textColor="@color/white"
+            android:text="@string/save_color" />
 
     </RelativeLayout>
 
