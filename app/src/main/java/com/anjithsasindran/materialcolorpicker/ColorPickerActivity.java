@@ -56,8 +56,8 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         blue = Color.blue(current);
         Color.RGBToHSV(red, green, blue, hsv);
         hue = (int) hsv[0];
-        sat = (int) hsv[1] * 100;
-        value = (int) hsv[2] * 100;
+        sat = (int) (hsv[1] * 100);
+        value = (int) (hsv[2] * 100);
         Log.d(TAG, "Color converted to RGB space " + String.valueOf(red) + String.valueOf(green) + String.valueOf(blue));
         Log.d(TAG, "Color converted to HSV space " + String.valueOf(hsv[0]) + " " + String.valueOf(hsv[1]) + " " + String.valueOf(hsv[2]));
         Log.d(TAG, "HSV As integers " + hue + " " + sat + " " + value);
