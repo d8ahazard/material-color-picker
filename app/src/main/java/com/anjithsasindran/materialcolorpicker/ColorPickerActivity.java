@@ -141,8 +141,9 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
             hue = progress;
             Log.d(TAG, "HueBar updated " + hue + " as float " + (float) hue);
-            Log.d(TAG, "We can read hsv as " + hsv[0]);
+            Log.d(TAG, "HSV was " + hsv[0]);
             hsv[0] = (float) hue;
+            Log.d(TAG, "We can read hsv as " + hsv[0]);
             thumbRect = seekBar.getThumb().getBounds();
 
             hueToolTip.setX(seekBarLeft + thumbRect.left);
@@ -157,7 +158,10 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         } else if (seekBar.getId() == R.id.satSeekBar) {
 
             sat = progress/100;
+            Log.d(TAG, "SatBar updated " + sat + " as float " + (float) sat);
+            Log.d(TAG, "HSV was " + hsv[1]);
             hsv[1] = (float) sat;
+            Log.d(TAG, "We can read hsv as " + hsv[1]);
             thumbRect = seekBar.getThumb().getBounds();
 
             satToolTip.setX(seekBar.getPaddingLeft() + thumbRect.left);
@@ -171,7 +175,10 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         } else if (seekBar.getId() == R.id.valueSeekBar) {
 
             value = progress/100;
+            Log.d(TAG, "ValBar updated " + value + " as float " + (float) value);
+            Log.d(TAG, "HSV was " + hsv[2]);
             hsv[2] = (float) value;
+            Log.d(TAG, "We can read hsv as " + hsv[2]);
             thumbRect = seekBar.getThumb().getBounds();
 
             valueToolTip.setX(seekBarLeft + thumbRect.left);
@@ -183,7 +190,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 valueToolTip.setText(value + "");
 
         }
-
+        Log.d(TAG, "Trying to set color to " + Color.HSVToColor(hsv));
         colorView.setBackgroundColor(Color.HSVToColor(hsv));
         buttonSelector.setBackgroundColor(Color.HSVToColor(hsv));
 
