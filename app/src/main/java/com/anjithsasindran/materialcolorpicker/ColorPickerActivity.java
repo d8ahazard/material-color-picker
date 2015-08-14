@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
@@ -158,7 +159,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             barh[0] = (float) hue;
             barh[1] = 0.5f;
             barh[2] = 0.5f;
-            hueSeekBar.setBackgroundColor(Color.HSVToColor(barh));
+            hueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barh), PorterDuff.Mode.SRC_IN);
 
         } else if (seekBar.getId() == R.id.satSeekBar) {
 
