@@ -170,14 +170,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             barv[0] = (float) hue;
             barv[1] = 1.0f;
             barv[2] = hsv[2];
-            valueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            valueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.MULTIPLY);
             valueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
             valueToolTip.setTextColor(Color.HSVToColor(barv));
 
             hueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barh), PorterDuff.Mode.SRC_IN);
             hueToolTip.setTextColor(Color.HSVToColor(barh));
 
-            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
+            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.MULTIPLY);
             satSeekBar.getThumb().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
             satToolTip.setTextColor(Color.HSVToColor(bars));
 
@@ -206,7 +206,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 bars[1] = (float) sat / 100;
             }
             bars[2] = 1.0f;
-            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
+            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.MULTIPLY);
             satSeekBar.getThumb().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
             satToolTip.setTextColor(Color.HSVToColor(bars));
 
@@ -230,7 +230,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             barv[0] = hsv[0];
             barv[1] = 1.0f;
             barv[2] = (float) value/100;
-            valueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            valueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.MULTIPLY);
             valueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
             valueToolTip.setTextColor(Color.HSVToColor(barv));
 
