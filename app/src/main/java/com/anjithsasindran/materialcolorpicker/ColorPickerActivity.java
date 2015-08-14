@@ -157,10 +157,10 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         } else if (seekBar.getId() == R.id.satSeekBar) {
 
-            sat = progress/100;
-            Log.d(TAG, "SatBar updated " + progress + " as float " + (float) sat);
+            sat = (progress/100);
+            Log.d(TAG, "SatBar updated " + progress + " as float " + sat);
             Log.d(TAG, "HSV was " + hsv[1]);
-            hsv[1] = (float) progress;
+            hsv[1] = sat;
             Log.d(TAG, "We can read hsv as " + hsv[1]);
             thumbRect = seekBar.getThumb().getBounds();
 
@@ -174,10 +174,10 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
 
         } else if (seekBar.getId() == R.id.valueSeekBar) {
 
-            value = progress/100;
-            Log.d(TAG, "ValBar updated " + progress + " as float " + (float) progress);
+            value = (progress/100);
+            Log.d(TAG, "ValBar updated " + progress + " as float " + value;
             Log.d(TAG, "HSV was " + hsv[2]);
-            hsv[2] = (float) progress;
+            hsv[2] = value;
             Log.d(TAG, "We can read hsv as " + hsv[2]);
             thumbRect = seekBar.getThumb().getBounds();
 
