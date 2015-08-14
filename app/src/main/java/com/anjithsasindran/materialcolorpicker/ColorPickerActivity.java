@@ -154,6 +154,11 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 hueToolTip.setText(" " + hue);
             else
                 hueToolTip.setText(hue + "");
+            float[] barh = new float[3];
+            barh[0] = (float) hue;
+            barh[1] = 0.5f;
+            barh[2] = 0.5f;
+            hueSeekBar.setBackgroundColor(Color.HSVToColor(barh));
 
         } else if (seekBar.getId() == R.id.satSeekBar) {
 
