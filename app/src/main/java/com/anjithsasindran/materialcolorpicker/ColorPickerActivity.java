@@ -32,7 +32,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     Window window;
     Display display;
     int red, green, blue, hue, sat, value, seekBarLeft;
-    float hsv[];
+    public float hsv[];
      Rect thumbRect;
 
     @Override
@@ -139,6 +139,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         if (seekBar.getId() == R.id.hueSeekBar) {
 
             hue = progress;
+            Log.d(TAG, "HueBar updated " + hue + "as float " + (float) hue);
             hsv[0] = (float) hue;
             thumbRect = seekBar.getThumb().getBounds();
 
