@@ -50,11 +50,11 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         }
 
         display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-
+        float[] hsv = new float[3];
         red = Color.red(current);
         green = Color.green(current);
         blue = Color.blue(current);
-        Color.colorToHSV(current, hsv);
+        Color.RGBToHSV(red, green, blue, hsv);
         hue = (int) hsv[0];
         sat = (int) hsv[1];
         value = (int) hsv[0];
