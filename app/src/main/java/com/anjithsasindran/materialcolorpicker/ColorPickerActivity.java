@@ -26,13 +26,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     public static final String TAG = "Colorpicker: ";
     public static Integer current = null;
     View colorView;
-    SeekBar redSeekBar, greenSeekBar, blueSeekBar;
-    TextView redToolTip, greenToolTip, blueToolTip;
+    SeekBar hueSeekBar, satSeekBar, valueSeekBar;
+    TextView hueToolTip, satToolTip, valueToolTip;
     Button buttonSelector;
     Window window;
     Display display;
-    int red, green, blue, seekBarLeft;
-    Rect thumbRect;
+    int red, green, blue, hue, sat, value, seekBarLeft;
+    float hsv[];
+     Rect thumbRect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,30 +54,34 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         red = Color.red(current);
         green = Color.green(current);
         blue = Color.blue(current);
-        Log.d(TAG, "Color converted to " + String.valueOf(red) + String.valueOf(green) + String.valueOf(blue));
-
+        Color.colorToHSV(current, hsv);
+        hue = (int) hsv[0];
+        sat = (int) hsv[1];
+        value = (int) hsv[0];
+        Log.d(TAG, "Color converted to RGB space " + String.valueOf(red) + String.valueOf(green) + String.valueOf(blue));
+        Log.d(TAG, "Color converted to HSV space " + String.valueOf(hsv[0]) + String.valueOf(hsv[1]) + String.valueOf(hsv[2]));
         colorView = findViewById(R.id.colorView);
         window = getWindow();
 
-        redSeekBar = (SeekBar) findViewById(R.id.redSeekBar);
-        greenSeekBar = (SeekBar) findViewById(R.id.greenSeekBar);
-        blueSeekBar = (SeekBar) findViewById(R.id.blueSeekBar);
+        hueSeekBar = (SeekBar) findViewById(R.id.hueSeekBar);
+        satSeekBar = (SeekBar) findViewById(R.id.satSeekBar);
+        valueSeekBar = (SeekBar) findViewById(R.id.valueSeekBar);
 
-        seekBarLeft = redSeekBar.getPaddingLeft();
+        seekBarLeft = hueSeekBar.getPaddingLeft();
 
-        redToolTip = (TextView) findViewById(R.id.redToolTip);
-        greenToolTip = (TextView) findViewById(R.id.greenToolTip);
-        blueToolTip = (TextView) findViewById(R.id.blueToolTip);
+        hueToolTip = (TextView) findViewById(R.id.hueToolTip);
+        satToolTip = (TextView) findViewById(R.id.satToolTip);
+        valueToolTip = (TextView) findViewById(R.id.valueToolTip);
 
         buttonSelector = (Button) findViewById(R.id.buttonSelector);
 
-        redSeekBar.setOnSeekBarChangeListener(this);
-        greenSeekBar.setOnSeekBarChangeListener(this);
-        blueSeekBar.setOnSeekBarChangeListener(this);
+        hueSeekBar.setOnSeekBarChangeListener(this);
+        satSeekBar.setOnSeekBarChangeListener(this);
+        valueSeekBar.setOnSeekBarChangeListener(this);
 
-        redSeekBar.setProgress(red);
-        greenSeekBar.setProgress(green);
-        blueSeekBar.setProgress(blue);
+        hueSeekBar.setProgress((int) hsv[0]);
+        satSeekBar.setProgress((int) hsv[1]);
+        valueSeekBar.setProgress((int) hsv[2]);
 
         //Setting View, Status bar & button color & hex codes
 
@@ -95,90 +100,90 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
 
-        thumbRect = redSeekBar.getThumb().getBounds();
+        thumbRect = hueSeekBar.getThumb().getBounds();
 
-        redToolTip.setX(seekBarLeft + thumbRect.left);
-        if (red < 10)
-            redToolTip.setText("  " + red);
-        else if (red < 100)
-            redToolTip.setText(" " + red);
+        hueToolTip.setX(seekBarLeft + thumbRect.left);
+        if (hue < 10)
+            hueToolTip.setText("  " + hue);
+        else if (hue < 100)
+            hueToolTip.setText(" " + hue);
         else
-            redToolTip.setText(red + "");
+            hueToolTip.setText(hue + "");
 
-        thumbRect = greenSeekBar.getThumb().getBounds();
+        thumbRect = satSeekBar.getThumb().getBounds();
 
-        greenToolTip.setX(seekBarLeft + thumbRect.left);
-        if (green < 10)
-            greenToolTip.setText("  " + green);
-        else if (red < 100)
-            greenToolTip.setText(" " + green);
+        satToolTip.setX(seekBarLeft + thumbRect.left);
+        if (sat < 10)
+            satToolTip.setText("  " + sat);
+        else if (sat < 100)
+            satToolTip.setText(" " + sat);
         else
-            greenToolTip.setText(green + "");
+            satToolTip.setText(sat + "");
 
-        thumbRect = blueSeekBar.getThumb().getBounds();
+        thumbRect = valueSeekBar.getThumb().getBounds();
 
-        blueToolTip.setX(seekBarLeft + thumbRect.left);
-        if (blue < 10)
-            blueToolTip.setText("  " + blue);
-        else if (blue < 100)
-            blueToolTip.setText(" " + blue);
+        valueToolTip.setX(seekBarLeft + thumbRect.left);
+        if (value < 10)
+            valueToolTip.setText("  " + value);
+        else if (value < 100)
+            valueToolTip.setText(" " + value);
         else
-            blueToolTip.setText(blue + "");
+            valueToolTip.setText(value + "");
 
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
-        if (seekBar.getId() == R.id.redSeekBar) {
+        if (seekBar.getId() == R.id.hueSeekBar) {
 
-            red = progress;
+            hue = progress;
             thumbRect = seekBar.getThumb().getBounds();
 
-            redToolTip.setX(seekBarLeft + thumbRect.left);
+            hueToolTip.setX(seekBarLeft + thumbRect.left);
 
             if (progress < 10)
-                redToolTip.setText("  " + red);
+                hueToolTip.setText("  " + hue);
             else if (progress < 100)
-                redToolTip.setText(" " + red);
+                hueToolTip.setText(" " + hue);
             else
-                redToolTip.setText(red + "");
+                hueToolTip.setText(hue + "");
 
-        } else if (seekBar.getId() == R.id.greenSeekBar) {
+        } else if (seekBar.getId() == R.id.satSeekBar) {
 
-            green = progress;
+            sat = progress;
             thumbRect = seekBar.getThumb().getBounds();
 
-            greenToolTip.setX(seekBar.getPaddingLeft() + thumbRect.left);
+            satToolTip.setX(seekBar.getPaddingLeft() + thumbRect.left);
             if (progress < 10)
-                greenToolTip.setText("  " + green);
+                satToolTip.setText("  " + sat);
             else if (progress < 100)
-                greenToolTip.setText(" " + green);
+                satToolTip.setText(" " + sat);
             else
-                greenToolTip.setText(green + "");
+                satToolTip.setText(sat + "");
 
-        } else if (seekBar.getId() == R.id.blueSeekBar) {
+        } else if (seekBar.getId() == R.id.valueSeekBar) {
 
-            blue = progress;
+            value = progress;
             thumbRect = seekBar.getThumb().getBounds();
 
-            blueToolTip.setX(seekBarLeft + thumbRect.left);
+            valueToolTip.setX(seekBarLeft + thumbRect.left);
             if (progress < 10)
-                blueToolTip.setText("  " + blue);
+                valueToolTip.setText("  " + value);
             else if (progress < 100)
-                blueToolTip.setText(" " + blue);
+                valueToolTip.setText(" " + value);
             else
-                blueToolTip.setText(blue + "");
+                valueToolTip.setText(value + "");
 
         }
 
-        colorView.setBackgroundColor(Color.rgb(red, green, blue));
-        buttonSelector.setBackgroundColor(Color.rgb(red, green, blue));
+        colorView.setBackgroundColor(Color.HSVToColor(hsv));
+        buttonSelector.setBackgroundColor(Color.HSVToColor(hsv));
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 
             if (display.getRotation() == Surface.ROTATION_0)
-                window.setStatusBarColor(Color.rgb(red, green, blue));
+                window.setStatusBarColor(Color.HSVToColor(hsv));
 
         }
 
@@ -202,53 +207,13 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         return 0xFF000000 | Red | Green | Blue; //0xFF000000 for 100% Alpha. Bitwise OR everything together.
     }
 
-    /**
-     * Converts an HSL color value to RGB. Conversion formula
-     * adapted from http://en.wikipedia.org/wiki/HSL_color_space.
-     * Assumes h, s, and l are contained in the set [0, 1] and
-     * returns r, g, and b in the set [0, 255].
-     *
-     * @param   Number  h       The hue
-     * @param   Number  s       The saturation
-     * @param   Number  l       The lightness
-     * @return  Array           The RGB representation
-     */
-    public int hslToRgb(int h,int  s,int l){
-
-        int r;
-        int g;
-        int b;
-
-        if(s == 0){
-            r = g = b = l; // achromatic
-        }else{
-
-
-            int q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-            int p = 2 * l - q;
-            r = hue2rgb(p, q, h + 1/3);
-            g = hue2rgb(p, q, h);
-            b = hue2rgb(p, q, h - 1/3);
-        }
-
-        return (Color.rgb((Math.round(r * 255)), (Math.round(g * 255)), (Math.round(b * 255))));
-    }
-
-    public int hue2rgb(int p,int q,int t){
-        if(t < 0) t += 1;
-        if(t > 1) t -= 1;
-        if(t < 1/6) return (p + (q - p) * 6 * t);
-        if(t < 1/2) return q;
-        if(t < 2/3) return p + (q - p) * (2/3 - t) * 6;
-        return p;
-    }
 
     public void colorSelect(View view) {
 
         Intent returnIntent = new Intent();
         returnIntent.putExtra("Name", colorname);
-        returnIntent.putExtra("Color", getIntFromColor(red, green, blue));
-        Log.d(TAG,"Final output - " + colorname + " " + red + " " + green + " " + blue);
+        returnIntent.putExtra("Color", Color.HSVToColor(hsv));
+        Log.d(TAG,"Final output - " + colorname + " " + String.valueOf(hsv[0]) + String.valueOf(hsv[1]) + String.valueOf(hsv[2]));
         Log.d(TAG,"Final output (int) - " + getIntFromColor(red, green, blue));
 
         setResult(COLOR_SELECTION_COMPLETE, returnIntent);
