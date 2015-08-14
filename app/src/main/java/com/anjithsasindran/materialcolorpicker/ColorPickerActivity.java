@@ -32,7 +32,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     Window window;
     Display display;
     int red, green, blue, hue, sat, value, seekBarLeft;
-    float hsv[];
+    float[] hsv = new float[3];
 
      Rect thumbRect;
 
@@ -43,7 +43,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         colorname = intent.getStringExtra("Prefname");
         current = intent.getIntExtra("Current", 0);
         Log.d(TAG, "Picker Started, received " + colorname + current.toString());
-        float[] hsv = new float[3];
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setContentView(R.layout.layout_color_picker);
         } else {
