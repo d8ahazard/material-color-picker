@@ -139,7 +139,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         if (seekBar.getId() == R.id.hueSeekBar) {
 
             hue = progress;
-            hsv[0] = hue;
+            hsv[0] = (float) hue;
             thumbRect = seekBar.getThumb().getBounds();
 
             hueToolTip.setX(seekBarLeft + thumbRect.left);
@@ -154,7 +154,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         } else if (seekBar.getId() == R.id.satSeekBar) {
 
             sat = progress/100;
-            hsv[1] = sat;
+            hsv[1] = (float) sat;
             thumbRect = seekBar.getThumb().getBounds();
 
             satToolTip.setX(seekBar.getPaddingLeft() + thumbRect.left);
@@ -168,7 +168,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         } else if (seekBar.getId() == R.id.valueSeekBar) {
 
             value = progress/100;
-            hsv[2] = value;
+            hsv[2] = (float) value;
             thumbRect = seekBar.getThumb().getBounds();
 
             valueToolTip.setX(seekBarLeft + thumbRect.left);
