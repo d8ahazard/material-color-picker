@@ -190,6 +190,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 valueToolTip.setText(value + "");
 
         }
+        Log.d(TAG, "HSV Components are " + hsv[0] + " " + hsv[1] + " " + hsv[2]);
         Log.d(TAG, "Trying to set color to " + Color.HSVToColor(hsv));
         colorView.setBackgroundColor(Color.HSVToColor(hsv));
         buttonSelector.setBackgroundColor(Color.HSVToColor(hsv));
