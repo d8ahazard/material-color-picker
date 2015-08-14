@@ -160,12 +160,19 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 hueToolTip.setText(hue + "");
             float[] barh = new float[3];
             float[] bars = new float[3];
+            float[] barv = new float[3];
             barh[0] = (float) hue;
             barh[1] = 1.0f;
             barh[2] = 1.0f;
-            bars[0] = hsv[0];
+            bars[0] = (float) hue;
             bars[1] = (float) sat/100;
             bars[2] = 1.0f;
+            barv[0] = (float) hue;
+            barv[1] = 1.0f;
+            barv[2] = hsv[2];
+            valueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            valueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            valueToolTip.setTextColor(Color.HSVToColor(barv));
 
             hueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barh), PorterDuff.Mode.SRC_IN);
             hueToolTip.setTextColor(Color.HSVToColor(barh));
