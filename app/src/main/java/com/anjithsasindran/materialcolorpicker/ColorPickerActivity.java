@@ -32,7 +32,8 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
     Window window;
     Display display;
     int red, green, blue, hue, sat, value, seekBarLeft;
-    public float hsv[];
+    float hsv[];
+
      Rect thumbRect;
 
     @Override
@@ -42,7 +43,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         colorname = intent.getStringExtra("Prefname");
         current = intent.getIntExtra("Current", 0);
         Log.d(TAG, "Picker Started, received " + colorname + current.toString());
-
+        float[] hsv = new float[2];
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setContentView(R.layout.layout_color_picker);
         } else {
@@ -50,14 +51,14 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         }
 
         display = ((WindowManager) this.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
-        float[] hsv = new float[3];
+
         red = Color.red(current);
         green = Color.green(current);
         blue = Color.blue(current);
         Color.RGBToHSV(red, green, blue, hsv);
-        hue = (int) hsv[0];
-        sat = (int) (hsv[1] * 100);
-        value = (int) (hsv[2] * 100);
+        hue = Math.round(hsv[0]);
+        sat = Math.round(hsv[1] * 100);
+        value = Math.round(hsv[2] * 100);
         Log.d(TAG, "Color converted to RGB space " + String.valueOf(red) + String.valueOf(green) + String.valueOf(blue));
         Log.d(TAG, "Color converted to HSV space " + String.valueOf(hsv[0]) + " " + String.valueOf(hsv[1]) + " " + String.valueOf(hsv[2]));
         Log.d(TAG, "HSV As integers " + hue + " " + sat + " " + value);
@@ -139,7 +140,8 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         if (seekBar.getId() == R.id.hueSeekBar) {
 
             hue = progress;
-            Log.d(TAG, "HueBar updated " + hue + "as float " + (float) hue);
+            Log.d(TAG, "HueBar updated " + hue + " as float " + (float) hue);
+            Log.d(TAG, "We can read hsv as " + hsv[0]);
             hsv[0] = (float) hue;
             thumbRect = seekBar.getThumb().getBounds();
 
