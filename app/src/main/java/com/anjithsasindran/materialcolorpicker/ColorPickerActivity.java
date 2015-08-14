@@ -156,12 +156,20 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             else
                 hueToolTip.setText(hue + "");
             float[] barh = new float[3];
+            float[] bars = new float[3];
             barh[0] = (float) hue;
             barh[1] = 1.0f;
             barh[2] = 1.0f;
+            bars[0] = hsv[0];
+            bars[1] = (float) sat/100;
+            bars[2] = 1.0f;
             hueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barh), PorterDuff.Mode.SRC_IN);
             hueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barh), PorterDuff.Mode.SRC_IN);
             hueToolTip.setTextColor(Color.HSVToColor(barh));
+
+            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
+            satSeekBar.getThumb().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
+            satToolTip.setTextColor(Color.HSVToColor(bars));
 
         } else if (seekBar.getId() == R.id.satSeekBar) {
 
@@ -181,7 +189,12 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 satToolTip.setText(sat + "");
             float[] bars = new float[3];
             bars[0] = hsv[0];
-            bars[1] = (float) sat/100;
+            if (((float) sat/100) < 0.1f) {
+                //keep the bar from going 100% white
+                bars[1] = 0.1f;
+            } else {
+                bars[1] = (float) sat / 100;
+            }
             bars[2] = 1.0f;
             satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
             satSeekBar.getThumb().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
@@ -203,6 +216,13 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 valueToolTip.setText(" " + value);
             else
                 valueToolTip.setText(value + "");
+            float[] barv = new float[3];
+            barv[0] = hsv[0];
+            barv[1] = (float) sat/100;
+            barv[2] = 1.0f;
+            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            satSeekBar.getThumb().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            satToolTip.setTextColor(Color.HSVToColor(barv));
 
         }
         Log.d(TAG, "HSV Components are " + hsv[0] + " " + hsv[1] + " " + hsv[2]);
