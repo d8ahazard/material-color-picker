@@ -41,8 +41,8 @@
             android:max="360"
             android:maxHeight="3dip"
             android:minHeight="3dip"
-            android:progressDrawable="@drawable/red_progress"
-            android:thumbTint="@color/red"/>
+            android:thumb="@drawable/red_thumb_drawable"
+            android:progressDrawable="@drawable/gradient"/>
 
         <TextView
             android:layout_width="fill_parent"
@@ -62,8 +62,8 @@
             android:max="100"
             android:maxHeight="3dip"
             android:minHeight="3dip"
-            android:progressDrawable="@drawable/green_progress"
-            android:thumbTint="@color/green" />
+            android:thumb="@drawable/green_thumb_drawable"
+            android:progressDrawable="@drawable/gradient_wb" />
 
         <TextView
             android:layout_width="fill_parent"
@@ -83,8 +83,9 @@
             android:max="100"
             android:maxHeight="3dip"
             android:minHeight="3dip"
-            android:progressDrawable="@drawable/blue_progress"
-            android:thumbTint="@color/blue"/>
+            android:thumb="@drawable/blue_thumb_drawable"
+            android:progressDrawable="@drawable/gradient_bw" />
+
 
         <Button
             android:id="@+id/buttonSelector"

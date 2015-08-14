@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.InsetDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -163,7 +166,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
             bars[0] = hsv[0];
             bars[1] = (float) sat/100;
             bars[2] = 1.0f;
-            hueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barh), PorterDuff.Mode.SRC_IN);
+
             hueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barh), PorterDuff.Mode.SRC_IN);
             hueToolTip.setTextColor(Color.HSVToColor(barh));
 
@@ -218,11 +221,11 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 valueToolTip.setText(value + "");
             float[] barv = new float[3];
             barv[0] = hsv[0];
-            barv[1] = (float) sat/100;
-            barv[2] = 1.0f;
-            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
-            satSeekBar.getThumb().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
-            satToolTip.setTextColor(Color.HSVToColor(barv));
+            barv[1] = 1.0f;
+            barv[2] = (float) value/100;
+            valueSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            valueSeekBar.getThumb().setColorFilter(Color.HSVToColor(barv), PorterDuff.Mode.SRC_IN);
+            valueToolTip.setTextColor(Color.HSVToColor(barv));
 
         }
         Log.d(TAG, "HSV Components are " + hsv[0] + " " + hsv[1] + " " + hsv[2]);
@@ -277,6 +280,9 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         setResult(COLOR_SELECTION_CANCELLED, returnIntent);
         finish();
     }
+
+    private static final float PADDING_TOP_BOTTOM_PERCENT = 0.4f;
+
 
 
 }
