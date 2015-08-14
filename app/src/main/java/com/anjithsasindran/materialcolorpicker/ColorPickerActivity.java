@@ -43,7 +43,7 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         colorname = intent.getStringExtra("Prefname");
         current = intent.getIntExtra("Current", 0);
         Log.d(TAG, "Picker Started, received " + colorname + current.toString());
-        float[] hsv = new float[2];
+        float[] hsv = new float[3];
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setContentView(R.layout.layout_color_picker);
         } else {
