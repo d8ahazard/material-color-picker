@@ -179,6 +179,13 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
                 satToolTip.setText(" " + sat);
             else
                 satToolTip.setText(sat + "");
+            float[] bars = new float[3];
+            bars[0] = hsv[0];
+            bars[1] = (float) sat/100;
+            bars[2] = 1.0f;
+            satSeekBar.getProgressDrawable().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
+            satSeekBar.getThumb().setColorFilter(Color.HSVToColor(bars), PorterDuff.Mode.SRC_IN);
+            satToolTip.setTextColor(Color.HSVToColor(bars));
 
         } else if (seekBar.getId() == R.id.valueSeekBar) {
 
