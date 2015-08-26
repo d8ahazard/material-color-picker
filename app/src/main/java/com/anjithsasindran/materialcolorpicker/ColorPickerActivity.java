@@ -94,12 +94,8 @@ public class ColorPickerActivity extends Activity implements SeekBar.OnSeekBarCh
         colorView.setBackgroundColor(current);
         buttonSelector.setBackgroundColor(current);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+        window.setStatusBarColor(Color.rgb(red, green, blue));
 
-            if (display.getRotation() != Surface.ROTATION_90 && display.getRotation() != Surface.ROTATION_270)
-                window.setStatusBarColor(Color.rgb(red, green, blue));
-
-        }
 
     }
 
