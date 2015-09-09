@@ -17,11 +17,17 @@ android {
         }
     }
 }
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    provided fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.afollestad:material-dialogs:0.7.8.1'
-    compile 'com.wefika:flowlayout:0.3.0'
-    compile "com.google.android.gms:play-services:7.5.0"
+    compile(name:'discreteSeekBar', ext:'aar')
+
 }
+
+
